@@ -9,10 +9,10 @@ import (
 )
 
 type Team struct {
-	UUID        uuid.UUID `json:"uuid,omitempty"`
-	Name        string    `json:"name,omitempty"`
-	APIKeys     []APIKey  `json:"apiKeys,omitempty"`
-	Permissions []string  `json:"permissions"`
+	UUID        uuid.UUID    `json:"uuid,omitempty"`
+	Name        string       `json:"name,omitempty"`
+	APIKeys     []APIKey     `json:"apiKeys,omitempty"`
+	Permissions []Permission `json:"permissions"`
 }
 
 type APIKey struct {

@@ -2,6 +2,8 @@ package dtrack
 
 import (
 	"context"
+	"fmt"
+	"github.com/google/uuid"
 	"net/http"
 )
 
@@ -26,5 +28,15 @@ func (ps PermissionService) GetAll(ctx context.Context, po PageOptions) (p Page[
 	}
 
 	p.TotalCount = res.TotalCount
+	return
+}
+
+func (ps PermissionService) AddPermissionToTeam(ctx context.Context, permission Permission, team uuid.UUID) (t Team, err error) {
+	req, err := ps.client.newRequest(ctx, http.MethodPost, fmt.Sprintf("/api/v1/permission/%s/team/%s", permission.Name, team.String()))
+	if err != nil {
+		return
+	}
+
+	_, err = ps.client.doRequest(req, &t)
 	return
 }

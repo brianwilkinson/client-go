@@ -58,3 +58,13 @@ func (ts TeamService) GenerateAPIKey(ctx context.Context, teamUUID uuid.UUID) (k
 	key = apiKey.Key
 	return
 }
+
+func (ts TeamService) Create(ctx context.Context, team Team) (t Team, err error) {
+	req, err := ts.client.newRequest(ctx, http.MethodPut, "/api/v1/team", withBody(team))
+	if err != nil {
+		return
+	}
+
+	_, err = ts.client.doRequest(req, &t)
+	return
+}

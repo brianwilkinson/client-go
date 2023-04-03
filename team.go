@@ -9,10 +9,10 @@ import (
 )
 
 type Team struct {
-	UUID        uuid.UUID    `json:"uuid,omitempty"`
-	Name        string       `json:"name,omitempty"`
-	APIKeys     []APIKey     `json:"apiKeys,omitempty"`
-	Permissions []Permission `json:"permissions"`
+	UUID        uuid.UUID `json:"uuid,omitempty"`
+	Name        string    `json:"name,omitempty"`
+	APIKeys     []APIKey  `json:"apiKeys,omitempty"`
+	Permissions []string  `json:"permissions"`
 }
 
 type APIKey struct {
@@ -23,13 +23,13 @@ type TeamService struct {
 	client *Client
 }
 
-func (ts TeamService) Get(ctx context.Context, teamUUID uuid.UUID) (p Project, err error) {
+func (ts TeamService) Get(ctx context.Context, teamUUID uuid.UUID) (t Team, err error) {
 	req, err := ts.client.newRequest(ctx, http.MethodGet, fmt.Sprintf("/api/v1/team/%s", teamUUID))
 	if err != nil {
 		return
 	}
 
-	_, err = ts.client.doRequest(req, &p)
+	_, err = ts.client.doRequest(req, &t)
 	return
 }
 

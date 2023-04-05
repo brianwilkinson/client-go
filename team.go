@@ -71,7 +71,7 @@ func (ts TeamService) Create(ctx context.Context, team Team) (t Team, err error)
 }
 
 func (ts TeamService) Delete(ctx context.Context, team Team) (err error) {
-	req, err := ts.client.newRequest(ctx, http.MethodDelete, fmt.Sprintf("/api/v1/team", withBody(team)))
+	req, err := ts.client.newRequest(ctx, http.MethodDelete, "/api/v1/team", withBody(team))
 	if err != nil {
 		return
 	}

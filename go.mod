@@ -1,4 +1,4 @@
-module github.com/DependencyTrack/client-go
+module github.com/brianwilkinson/client-go
 
 go 1.18
 

@@ -126,10 +126,12 @@ func (ps ProjectService) Delete(ctx context.Context, projectUUID uuid.UUID) (err
 	return
 }
 
-func (ps ProjectService) Lookup(ctx context.Context, name, version string) (p Project, err error) {
+func (ps ProjectService) Lookup(ctx context.Context, name string, version *string) (p Project, err error) {
 	params := map[string]string{
-		"name":    name,
-		"version": version,
+		"name": name,
+	}
+	if version != nil {
+		params["version"] = *version
 	}
 
 	req, err := ps.client.newRequest(ctx, http.MethodGet, "/api/v1/project/lookup", withParams(params))
